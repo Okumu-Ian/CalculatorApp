@@ -1,4 +1,7 @@
+import shapes.Circle
+import shapes.polygons.Square
 import java.util.*
+import kotlin.collections.ArrayList
 
 fun main(args: Array<String>) {
     //Welcome Message
@@ -69,7 +72,7 @@ fun main(args: Array<String>) {
                     " is ${remNumbers}")
         }
         6 -> {
-            println("Others")
+            displayOthersMenu(userInput)
         }
         else -> {
             println("Wrong Option. Try Again Next Time")
@@ -91,6 +94,79 @@ fun displayMainMenu(){
         //we must alter iterator
         i++
     }
+}
+
+//function to display other menu
+fun displayOthersMenu(numInput: Scanner){
+    //others list
+    val others = listOf("1. PERIMETER","2. AREA","3. DIAGONAL CALCULATION")
+    //using for-loop to display menu
+    for( option in others ){
+        println(option)
+    }
+    //display message to ask for value
+    print("PICK A NUMBER FROM THE OPTIONS ABOVE: ")
+    //variable to hold input
+    val mySelectedMenu = numInput.nextInt()
+    //check value provided
+    when (mySelectedMenu){
+        1 -> {menuAreaPerimeter(false,numInput)}
+        2 -> {menuAreaPerimeter(true,numInput)}
+        3 -> {}
+        else -> { println("Wrong Option! GoodBye")}
+    }
+}
+
+//display menu for perimeter and area
+fun menuAreaPerimeter(isArea:Boolean, numInput: Scanner){
+    //creating list using array list methodology
+    val shapes:ArrayList<String> = ArrayList()
+    shapes.add("1.Circle")
+    shapes.add("2.Square")
+    shapes.add("3.Rectangle")
+    shapes.add("4.Trapezium")
+    shapes.add("5.Triangle")
+    //display options using forEach method
+    shapes.forEach {
+        println(it)
+    }
+    //check option selected
+    when(numInput.nextInt()){
+        1 -> {
+            //retrieve radius
+            print("ENTER CIRCLE RADIUS:")
+            val radius = numInput.nextDouble()
+            //create circle object
+            val myCircle = Circle(radius)
+            //check if area or perimeter
+            if(isArea){
+                println("Area of the circle is ${myCircle.area()}")
+            }else{
+                println("Perimeter of the circle is ${myCircle.perimeter()}")
+            }
+        }
+        2 -> {
+            //retrieve side
+            print("ENTER SQUARE SIDE:")
+            val side = numInput.nextDouble()
+            //create Square object
+            val mySquare = Square(side)
+            //check if area or perimeter
+            if(isArea){
+                println("Area of the square is ${mySquare.area()}")
+            }else{
+                println("Perimeter of the square is ${mySquare.perimeter()}")
+            }
+        }
+        3 -> {}
+        4 -> {}
+        5 -> {}
+        else -> {
+            println("Wrong Option! Goodbye ...")
+        }
+    }
+
+
 }
 
 //function to add two numbers
